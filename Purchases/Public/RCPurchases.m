@@ -424,7 +424,6 @@ static BOOL _automaticAppleSearchAdsAttributionCollection = NO;
 }
 
 - (void)resetWithCompletionBlock:(nullable RCReceivePurchaserInfoBlock)completion {
-    [self.deviceCache clearLatestNetworkAndAdvertisingIdsSentForAppUserID:self.identityManager.currentAppUserID];
     [self.identityManager resetAppUserID];
     [self updateAllCachesWithCompletionBlock:completion];
 }
