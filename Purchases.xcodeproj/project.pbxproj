@@ -179,7 +179,7 @@
 		37E35AF213F2F79CB067FDC2 /* InMemoryCachedObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E35E3250FBBB03D92E06EC /* InMemoryCachedObjectTests.swift */; };
 		37E35B1F34D1624509012749 /* MockSubscriberAttributesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E351D48260D9DC8B1EE360 /* MockSubscriberAttributesManager.swift */; };
 		37E35B4BDE7D7B1EFB3EE800 /* NSError+RCExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E35088AB7C4F7A242D3ED5 /* NSError+RCExtensions.m */; };
-		37E35B94F66AD4C3BC3E3D54 /* RCPurchaserInfoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 37E35A375CFEFEE4D6DEFD11 /* RCPurchaserInfoManager.h */; };
+		37E35B94F66AD4C3BC3E3D54 /* RCPurchaserInfoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 37E35A375CFEFEE4D6DEFD11 /* RCPurchaserInfoManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		37E35BDDC331C3A5FF72CFFF /* RCStoreKitRequestFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E351CDC94FE0A49A3DAAB3 /* RCStoreKitRequestFetcher.m */; };
 		37E35BE05E2A8BB2BD310CB0 /* RCHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 37E356C39D29EB6C8EC2D6BD /* RCHTTPClient.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		37E35C1B3C0170F15FC920F5 /* RCPackage+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 37E35DF0786134609B68FA23 /* RCPackage+Protected.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -1125,6 +1125,7 @@
 				37E3598A1AAA3D70EA01C82D /* RCInMemoryCachedObject.h in Headers */,
 				37E352F190E0E957E8D932F8 /* RCDeviceCache.h in Headers */,
 				2D5033262406E4E8009CAE61 /* RCSpecialSubscriberAttributes.h in Headers */,
+				37E35B94F66AD4C3BC3E3D54 /* RCPurchaserInfoManager.h in Headers */,
 				2D5033242406E4E8009CAE61 /* RCSubscriberAttribute.h in Headers */,
 				2D50332A2406EA61009CAE61 /* RCSubscriberAttributesManager.h in Headers */,
 				2DD448FF24088473002F5694 /* RCPurchases+SubscriberAttributes.h in Headers */,
@@ -1169,7 +1170,6 @@
 				37E35A328C4DC8A4D2DB4B06 /* RCAttributionNetwork.h in Headers */,
 				37E35C5E805407840AC79468 /* RCReceiptRefreshPolicy.h in Headers */,
 				37E35D01E3A0F5FC8E0B16F7 /* RCIdentityManager.h in Headers */,
-				37E35B94F66AD4C3BC3E3D54 /* RCPurchaserInfoManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
