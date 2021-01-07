@@ -33,7 +33,7 @@ class PurchasesSubscriberAttributesTests: XCTestCase {
     var mockIntroEligibilityCalculator: MockIntroEligibilityCalculator!
 
     let purchasesDelegate = MockPurchasesDelegate()
-    var purchaserInfoManager: RCPurchaserInfoManager!
+    var purchaserInfoManager: PurchaserInfoManager!
 
     var purchases: Purchases!
 
@@ -53,10 +53,10 @@ class PurchasesSubscriberAttributesTests: XCTestCase {
         self.mockAttributionFetcher = MockAttributionFetcher(deviceCache: mockDeviceCache,
                                                              identityManager: mockIdentityManager,
                                                              backend: mockBackend)
-        self.purchaserInfoManager = RCPurchaserInfoManager(operationDispatcher: mockOperationDispatcher,
-                                                           deviceCache: mockDeviceCache,
-                                                           backend: mockBackend,
-                                                           systemInfo: systemInfo)
+        self.purchaserInfoManager = PurchaserInfoManager(operationDispatcher: mockOperationDispatcher,
+                                                         deviceCache: mockDeviceCache,
+                                                         backend: mockBackend,
+                                                         systemInfo: systemInfo)
 
     }
 

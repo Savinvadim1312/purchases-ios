@@ -20,10 +20,10 @@ class PurchasesTests: XCTestCase {
         attributionFetcher = MockAttributionFetcher(deviceCache: deviceCache,
                                                     identityManager: identityManager,
                                                     backend: backend)
-        purchaserInfoManager = RCPurchaserInfoManager(operationDispatcher: mockOperationDispatcher,
-                                                      deviceCache: deviceCache,
-                                                      backend: backend,
-                                                      systemInfo: systemInfo)
+        purchaserInfoManager = PurchaserInfoManager(operationDispatcher: mockOperationDispatcher,
+                                                    deviceCache: deviceCache,
+                                                    backend: backend,
+                                                    systemInfo: systemInfo)
     }
 
     override func tearDown() {
@@ -196,7 +196,7 @@ class PurchasesTests: XCTestCase {
     var mockIntroEligibilityCalculator: MockIntroEligibilityCalculator!
     var mockReceiptParser: MockReceiptParser!
     var attributionFetcher: MockAttributionFetcher!
-    var purchaserInfoManager: RCPurchaserInfoManager!
+    var purchaserInfoManager: PurchaserInfoManager!
 
     let purchasesDelegate = MockPurchasesDelegate()
 

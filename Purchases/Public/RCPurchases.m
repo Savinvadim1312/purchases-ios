@@ -229,14 +229,7 @@ static BOOL _automaticAppleSearchAdsAttributionCollection = NO;
     }
 
     RCDeviceCache *deviceCache = [[RCDeviceCache alloc] initWith:userDefaults];
-    RCIdentityManager *identityManager = [[RCIdentityManager alloc] initWith:deviceCache backend:backend];
-    RCAttributionFetcher *attributionFetcher = [[RCAttributionFetcher alloc] initWithDeviceCache:deviceCache
-                                                                                 identityManager:identityManager
-                                                                                         backend:backend];
-    RCSubscriberAttributesManager *subscriberAttributesManager =
-            [[RCSubscriberAttributesManager alloc] initWithBackend:backend
-                                                       deviceCache:deviceCache
-                                                attributionFetcher:attributionFetcher];
+
     RCOperationDispatcher *operationDispatcher = [[RCOperationDispatcher alloc] init];
     RCIntroEligibilityCalculator *introCalculator = [[RCIntroEligibilityCalculator alloc] init];
     RCReceiptParser *receiptParser = [[RCReceiptParser alloc] init];
@@ -245,7 +238,16 @@ static BOOL _automaticAppleSearchAdsAttributionCollection = NO;
                                                                                             deviceCache:deviceCache
                                                                                                 backend:backend
                                                                                              systemInfo:systemInfo];
-
+    RCIdentityManager *identityManager = [[RCIdentityManager alloc] initWith:deviceCache
+                                                                     backend:backend
+                                                        purchaserInfoManager:purchaserInfoManager];
+    RCAttributionFetcher *attributionFetcher = [[RCAttributionFetcher alloc] initWithDeviceCache:deviceCache
+                                                                                 identityManager:identityManager
+                                                                                         backend:backend];
+    RCSubscriberAttributesManager *subscriberAttributesManager =
+        [[RCSubscriberAttributesManager alloc] initWithBackend:backend
+                                                   deviceCache:deviceCache
+                                            attributionFetcher:attributionFetcher];
     return [self initWithAppUserID:appUserID
                     requestFetcher:fetcher
                     receiptFetcher:receiptFetcher
