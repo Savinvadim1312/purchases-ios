@@ -111,8 +111,7 @@ int cacheDurationInSecondsInBackground = 60 * 60 * 24;
         [self.userDefaults removeObjectForKey:[self purchaserInfoUserDefaultCacheKeyForAppUserID:oldAppUserID]];
         [self clearPurchaserInfoCacheTimestampForAppUserID:oldAppUserID];
         [self clearOfferingsCache];
-        [self clearLatestNetworkAndAdvertisingIdsSentForAppUserID:oldAppUserID];
-        
+
         [self deleteAttributesIfSyncedForAppUserID:oldAppUserID];
 
         [self cacheAppUserID:newUserID];
