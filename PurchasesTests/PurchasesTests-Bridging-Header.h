@@ -45,3 +45,4 @@
 #include <Purchases/RCProductInfoExtractor.h>
 #include <Purchases/NSDictionary+RCExtensions.h>
 #include <Purchases/RCPurchaserInfoManager.h>
+#include <Purchases/RCPurchaserInfoManager+Protected.h>
