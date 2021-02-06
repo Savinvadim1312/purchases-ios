@@ -3,22 +3,22 @@
  * @author Vadim Savin
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './styles.js';
+import {
+  testCold,
+  generateSampleData,
+  Environment,
+} from '../Helpers/SampleData';
 
 /*
  The app's weather tab that displays our pretend weather data.
  */
 
 const WeatherScreen = () => {
-  const currentData = {
-    emoji: '❄️',
-    temperature: 14,
-    unit: 'F',
-    weatherColor: '#043580',
-  };
+  const [weatherData, setWeatherData] = useState(testCold);
 
   const changeEnvironment = () => {
     // we'll change the environment in a future update
@@ -29,20 +29,22 @@ const WeatherScreen = () => {
     /*
      We should check if we can magically change the weather (subscription active) and if not, display the paywall.
      */
+    setWeatherData(generateSampleData(Environment.EARTH));
   };
 
   return (
-    <View style={[styles.page, { backgroundColor: currentData.weatherColor }]}>
+    <View style={[styles.page, { backgroundColor: weatherData.weatherColor }]}>
       {/* Sample weather details */}
-      <Text style={styles.emoji}>{currentData.emoji}</Text>
+      <Text style={styles.emoji}>{weatherData.emoji}</Text>
       <Text style={styles.temperature}>
-        {currentData.temperature}°{currentData.unit.toUpperCase()}️
+        {weatherData.temperature}°{weatherData.unit.toUpperCase()}️
       </Text>
 
       {/* Environment button */}
       <Pressable onPress={changeEnvironment}>
         <Text style={styles.environment}>
-          <Ionicons name="navigate" color="white" size={24} /> Earth
+          <Ionicons name="navigate" color="white" size={24} />{' '}
+          {weatherData.environment}
         </Text>
       </Pressable>
 
