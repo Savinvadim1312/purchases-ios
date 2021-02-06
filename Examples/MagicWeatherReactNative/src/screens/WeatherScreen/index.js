@@ -1,9 +1,18 @@
+/**
+ * @file Magic Weather screen.
+ * @author Vadim Savin
+ */
+
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './styles.js';
 
-const WeatherScreen = (props) => {
+/*
+ The app's weather tab that displays our pretend weather data.
+ */
+
+const WeatherScreen = () => {
   const currentData = {
     emoji: '❄️',
     temperature: 14,
@@ -12,7 +21,7 @@ const WeatherScreen = (props) => {
   };
 
   const changeEnvironment = () => {
-    /// - we'll change the environment in a future update
+    // we'll change the environment in a future update
     console.log('Change environment');
   };
 
@@ -24,18 +33,20 @@ const WeatherScreen = (props) => {
 
   return (
     <View style={[styles.page, { backgroundColor: currentData.weatherColor }]}>
+      {/* Sample weather details */}
       <Text style={styles.emoji}>{currentData.emoji}</Text>
-
       <Text style={styles.temperature}>
         {currentData.temperature}°{currentData.unit.toUpperCase()}️
       </Text>
 
+      {/* Environment button */}
       <Pressable onPress={changeEnvironment}>
         <Text style={styles.environment}>
           <Ionicons name="navigate" color="white" size={24} /> Earth
         </Text>
       </Pressable>
 
+      {/* The magic button that is disabled behind our paywall */}
       <Pressable onPress={performMagic} style={styles.changeWeatherButton}>
         <Text style={styles.changeWeatherTitle}>✨ Change the Weather</Text>
       </Pressable>

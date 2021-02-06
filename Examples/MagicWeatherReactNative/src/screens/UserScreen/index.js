@@ -1,3 +1,8 @@
+/**
+ * @file User Screen.
+ * @author Vadim Savin
+ */
+
 import React from 'react';
 import { View, Text } from 'react-native';
 
