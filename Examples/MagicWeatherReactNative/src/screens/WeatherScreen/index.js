@@ -6,12 +6,14 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import styles from './styles.js';
+import { useNavigation } from '@react-navigation/native';
+import Credits from '../../components/Credits';
 import {
   testCold,
   generateSampleData,
   Environment,
-} from '../Helpers/SampleData';
+} from '../../Helpers/SampleData';
+import styles from './styles.js';
 
 /*
  The app's weather tab that displays our pretend weather data.
@@ -19,6 +21,8 @@ import {
 
 const WeatherScreen = () => {
   const [weatherData, setWeatherData] = useState(testCold);
+
+  const navigation = useNavigation();
 
   const changeEnvironment = () => {
     // we'll change the environment in a future update
@@ -49,9 +53,16 @@ const WeatherScreen = () => {
       </Pressable>
 
       {/* The magic button that is disabled behind our paywall */}
+      <Pressable onPress={() => navigation.navigate('Paywall')} style={styles.changeWeatherButton}>
+        <Text style={styles.changeWeatherTitle}>Paywall</Text>
+      </Pressable>
+
+      {/* The magic button that is disabled behind our paywall */}
       <Pressable onPress={performMagic} style={styles.changeWeatherButton}>
         <Text style={styles.changeWeatherTitle}>✨ Change the Weather</Text>
       </Pressable>
+
+      <Credits />
     </View>
   );
 };

@@ -6,12 +6,13 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable, TextInput } from 'react-native';
 import styles from './styles.js';
+import Credits from "../../components/Credits";
 
 const UserScreen = () => {
   const [newUserId, setNewUserId] = useState('');
 
   const subscriptionActive = false;
-  const isAnonymous = false;
+  const isAnonymous = true;
 
   const restorePurchases = () => {
     // restore purchases
@@ -71,6 +72,8 @@ const UserScreen = () => {
         style={styles.restorePurchasesButton}>
         <Text style={styles.restorePurchasesText}>Restore Purchases</Text>
       </Pressable>
+
+      <Credits />
     </View>
   );
 };

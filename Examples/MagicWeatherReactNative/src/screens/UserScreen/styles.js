@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     color: 'dodgerblue',
     fontFamily: 'ArialRoundedMTBold',
     fontSize: 18,
+    paddingVertical: 16,
   },
   logoutText: {
     color: 'red',

@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: 'ArialRoundedMTBold',
     fontSize: 20,
-    paddingTop: 16,
+    paddingVertical: 16,
   },
 });
 

@@ -17,17 +17,17 @@ const Router = () => {
     <NavigationContainer theme={DarkTheme}>
       <Stack.Navigator>
         <Stack.Screen
-          name="Paywall"
-          component={PaywallScreen}
-          options={{
-            title: '✨ Magic Weather Premium',
-          }}
-        />
-        <Stack.Screen
           name="Home"
           component={TabNavigator}
           options={{
             headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Paywall"
+          component={PaywallScreen}
+          options={{
+            title: '✨ Magic Weather Premium',
           }}
         />
       </Stack.Navigator>
