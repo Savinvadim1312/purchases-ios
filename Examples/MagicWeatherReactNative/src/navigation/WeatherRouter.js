@@ -1,3 +1,8 @@
+/**
+ * @file Weather Router.
+ * @author Vadim Savin
+ */
+
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import WeatherScreen from '../screens/WeatherScreen';

@@ -1,47 +1,36 @@
+/**
+ * @file App Router.
+ * @author Vadim Savin
+ */
+
 import React from 'react';
 import { NavigationContainer, DarkTheme } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import WeatherRouter from './WeatherRouter';
-import UserRouter from './UserRouter';
+import TabNavigator from './TabNavigator';
+import PaywallScreen from '../screens/PaywallScreen';
 
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const Router = () => {
   return (
     <NavigationContainer theme={DarkTheme}>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Weather"
-          component={WeatherRouter}
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Paywall"
+          component={PaywallScreen}
           options={{
-            tabBarIcon: ({ focused, color, size }) => (
-              <Ionicons
-                name={focused ? 'sunny' : 'sunny-outline'}
-                color={color}
-                size={size}
-              />
-            ),
+            title: '✨ Magic Weather Premium',
           }}
         />
-
-        <Tab.Screen
-          name="User"
-          component={UserRouter}
+        <Stack.Screen
+          name="Home"
+          component={TabNavigator}
           options={{
-            tabBarIcon: ({ focused, color, size }) => (
-              <Ionicons
-                name={
-                  focused ? 'ios-person-circle' : 'ios-person-circle-outline'
-                }
-                color={color}
-                size={size}
-              />
-            ),
+            headerShown: false,
           }}
         />
-      </Tab.Navigator>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
