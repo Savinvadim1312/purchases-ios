@@ -1,32 +1,40 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
-import PropTypes from 'prop-types';
+import Purchases from 'react-native-purchases';
+import { useNavigation } from '@react-navigation/native';
+import { ENTITLEMENT_ID } from '../../constants';
 import styles from './styles.js';
 
-const PackageItem = ({ packageItem }) => {
-  const { localizedTitle, terms, localizedPriceString } = packageItem;
+const PackageItem = ({ purchasePackage }) => {
+  const {
+    product: { title, description, price_string },
+  } = purchasePackage;
 
-  const onSelection = () => {
-    // TODO implement selection
+  const navigation = useNavigation();
+
+  const onSelection = async () => {
+    try {
+      const { purchaserInfo } = await Purchases.purchasePackage(purchasePackage);
+
+      if (typeof purchaserInfo.entitlements.active[ENTITLEMENT_ID] !== 'undefined') {
+        navigation.goBack();
+      }
+    } catch (e) {
+      if (!e.userCancelled) {
+        console.error(e);
+      }
+    }
   };
 
   return (
     <Pressable onPress={onSelection} style={styles.container}>
       <View style={styles.left}>
-        <Text style={styles.title}>{localizedTitle}</Text>
-        <Text style={styles.terms}>{terms}</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.terms}>{description}</Text>
       </View>
-      <Text style={styles.title}>{localizedPriceString}</Text>
+      <Text style={styles.title}>{price_string}</Text>
     </Pressable>
   );
-};
-
-PackageItem.propTypes = {
-  packageItem: PropTypes.shape({
-    localizedTitle: PropTypes.string.isRequired,
-    terms: PropTypes.string.isRequired,
-    localizedPriceString: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default PackageItem;
