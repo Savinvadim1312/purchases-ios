@@ -3,60 +3,48 @@
  * @author Vadim Savin
  */
 
-import React, { useState } from 'react';
-import { View, Text, Pressable, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text } from 'react-native';
+import Purchases from 'react-native-purchases';
+import { ENTITLEMENT_ID } from '../../constants';
+import { LoginForm, LogoutButton, RestorePurchasesButton, Credits } from '../../components';
 import styles from './styles.js';
-import Credits from "../../components/Credits";
 
+/*
+ The app's user tab to display user's details like subscription status and ID's.
+ */
 const UserScreen = () => {
-  const [newUserId, setNewUserId] = useState('');
+  const [isAnonymous, setIsAnonymous] = useState(true);
+  const [userId, setUserId] = useState(null);
+  const [subscriptionActive, setSubscriptionActive] = useState(false);
 
-  const subscriptionActive = false;
-  const isAnonymous = true;
+  // get the latest details about the user (is anonymous, user id, has active subscription)
+  const getUserDetails = async () => {
+    setIsAnonymous(await Purchases.isAnonymous());
+    setUserId(await Purchases.getAppUserID());
 
-  const restorePurchases = () => {
-    // restore purchases
+    const purchaserInfo = await Purchases.getPurchaserInfo();
+    setSubscriptionActive(typeof purchaserInfo.entitlements.active[ENTITLEMENT_ID] !== 'undefined');
   };
 
-  const login = () => {
-    if (!newUserId) {
-      return;
-    }
+  useEffect(() => {
+    // Get user details when component first mounts
+    getUserDetails();
+  }, []);
 
-    // TODO Implement login
-
-    setNewUserId('');
-  };
-
-  const logout = () => {
-    // TODO implement logout
-  };
-
-  const loginUI = () => (
-    <>
-      <Text style={[styles.headline, { paddingTop: 24 }]}>Login</Text>
-      <TextInput
-        value={newUserId}
-        onChangeText={setNewUserId}
-        onEndEditing={login}
-        placeholder="Enter App User ID"
-        placeholderTextColor="lightgrey"
-        style={styles.input}
-      />
-    </>
-  );
-
-  const logoutUI = () => (
-    <Pressable onPress={logout} style={{ marginTop: 'auto' }}>
-      <Text style={styles.logoutText}>Logout</Text>
-    </Pressable>
-  );
+  useEffect(() => {
+    // Subscribe to purchaser updates
+    Purchases.addPurchaserInfoUpdateListener(getUserDetails);
+    return () => {
+      Purchases.removePurchaserInfoUpdateListener(getUserDetails);
+    };
+  });
 
   return (
     <View style={styles.page}>
       {/* The user's current app user ID and subscription status */}
       <Text style={styles.headline}>Current User Identifier</Text>
-      <Text style={styles.userIdentifier}>User id</Text>
+      <Text style={styles.userIdentifier}>{userId}</Text>
 
       <Text style={styles.headline}>Subscription Status</Text>
       <Text style={{ color: subscriptionActive ? 'green' : 'red' }}>
@@ -64,14 +52,10 @@ const UserScreen = () => {
       </Text>
 
       {/* Authentication UI */}
-      {isAnonymous ? loginUI() : logoutUI()}
+      {isAnonymous ? <LoginForm onLogin={getUserDetails} /> : <LogoutButton onLogout={getUserDetails} />}
 
       {/* You should always give users the option to restore purchases to connect their purchase to their current app user ID */}
-      <Pressable
-        onPress={restorePurchases}
-        style={styles.restorePurchasesButton}>
-        <Text style={styles.restorePurchasesText}>Restore Purchases</Text>
-      </Pressable>
+      <RestorePurchasesButton />
 
       <Credits />
     </View>

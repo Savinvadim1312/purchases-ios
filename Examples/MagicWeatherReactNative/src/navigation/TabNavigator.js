@@ -20,11 +20,7 @@ const TabNavigator = () => {
         component={WeatherRouter}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons
-              name={focused ? 'sunny' : 'sunny-outline'}
-              color={color}
-              size={size}
-            />
+            <Ionicons name={focused ? 'sunny' : 'sunny-outline'} color={color} size={size} />
           ),
         }}
       />
@@ -34,11 +30,7 @@ const TabNavigator = () => {
         component={UserRouter}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons
-              name={focused ? 'ios-person-circle' : 'ios-person-circle-outline'}
-              color={color}
-              size={size}
-            />
+            <Ionicons name={focused ? 'ios-person-circle' : 'ios-person-circle-outline'} color={color} size={size} />
           ),
         }}
       />

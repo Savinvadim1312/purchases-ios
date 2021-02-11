@@ -1,24 +1,20 @@
 /**
- * @file User Screen styles.
+ * @file Login Form styles.
  * @author Vadim Savin
  */
 
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  page: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'space-between',
-    padding: 36,
-  },
   headline: {
     color: 'white',
     fontFamily: 'ArialRoundedMTBold',
     fontSize: 18,
-    paddingVertical: 8,
+    paddingTop: 24,
+    paddingBottom: 8,
   },
-  userIdentifier: {
+  input: {
+    paddingTop: 8,
     color: 'white',
   },
 });

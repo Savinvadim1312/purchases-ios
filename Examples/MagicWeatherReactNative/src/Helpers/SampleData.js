@@ -62,6 +62,9 @@ const getWeatherColor = (temperature) => {
   return '#CC003B';
 };
 
+/*
+ Generate Sample data for Magic Weather.
+ */
 export const generateSampleData = (environment, temperature) => {
   temperature = temperature || Math.floor(Math.random() * 140 - 20);
 

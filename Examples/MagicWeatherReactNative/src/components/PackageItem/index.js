@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Alert } from 'react-native';
 import Purchases from 'react-native-purchases';
 import { useNavigation } from '@react-navigation/native';
 import { ENTITLEMENT_ID } from '../../constants';
 import styles from './styles.js';
 
-const PackageItem = ({ purchasePackage }) => {
+const PackageItem = ({ purchasePackage, setIsPurchasing }) => {
   const {
     product: { title, description, price_string },
   } = purchasePackage;
@@ -13,6 +13,8 @@ const PackageItem = ({ purchasePackage }) => {
   const navigation = useNavigation();
 
   const onSelection = async () => {
+    setIsPurchasing(true);
+
     try {
       const { purchaserInfo } = await Purchases.purchasePackage(purchasePackage);
 
@@ -21,8 +23,10 @@ const PackageItem = ({ purchasePackage }) => {
       }
     } catch (e) {
       if (!e.userCancelled) {
-        console.error(e);
+        Alert.alert('Error purchasing package', e);
       }
+    } finally {
+      setIsPurchasing(false);
     }
   };
 

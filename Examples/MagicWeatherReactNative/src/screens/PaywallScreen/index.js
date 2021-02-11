@@ -4,30 +4,35 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
-import PackageItem from '../../components/PackageItem';
-import styles from './styles.js';
+import { View, Text, FlatList, Alert } from 'react-native';
 import Purchases from 'react-native-purchases';
+import { PackageItem } from '../../components';
+import styles from './styles.js';
 
+/*
+ An example paywall that uses the current offering.
+ */
 const PaywallScreen = () => {
+  // - State for all available package
   const [packages, setPackages] = useState([]);
 
+  // - State for displaying an overlay view
+  const [isPurchasing, setIsPurchasing] = useState(false);
+
   useEffect(() => {
-    const getOfferings = async () => {
+    // Get current available packages
+    const getPackages = async () => {
       try {
         const offerings = await Purchases.getOfferings();
-        if (
-          offerings.current !== null &&
-          offerings.current.availablePackages.length !== 0
-        ) {
+        if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {
           setPackages(offerings.current.availablePackages);
         }
       } catch (e) {
-        console.error(e.message);
+        Alert.alert('Error getting offers', e.message);
       }
     };
 
-    getOfferings();
+    getPackages();
   }, []);
 
   const header = () => <Text style={styles.text}>Magic Weather Premium</Text>;
@@ -38,8 +43,7 @@ const PaywallScreen = () => {
     );
     return (
       <Text style={styles.text}>
-        Don't forget to add your subscription terms and conditions. Read more
-        about this here:
+        Don't forget to add your subscription terms and conditions. Read more about this here:
         https://www.revenuecat.com/blog/schedule-2-section-3-8-b
       </Text>
     );
@@ -50,13 +54,15 @@ const PaywallScreen = () => {
       {/* The paywall flat list displaying each package */}
       <FlatList
         data={packages}
-        renderItem={({ item }) => <PackageItem purchasePackage={item} />}
+        renderItem={({ item }) => <PackageItem purchasePackage={item} setIsPurchasing={setIsPurchasing} />}
         keyExtractor={(item) => item.identifier}
         ListHeaderComponent={header}
-        ListHeaderComponentStyle={{ marginVertical: 10 }}
+        ListHeaderComponentStyle={styles.headerFooterContainer}
         ListFooterComponent={footer}
-        ListFooterComponentStyle={{ marginVertical: 10 }}
+        ListFooterComponentStyle={styles.headerFooterContainer}
       />
+
+      {isPurchasing && <View style={styles.overlay} />}
     </View>
   );
 };
